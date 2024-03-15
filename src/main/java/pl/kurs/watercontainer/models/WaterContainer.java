@@ -24,6 +24,18 @@ public class WaterContainer implements Serializable {
         return new WaterContainer(name, maxCapacity, waterLevel);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public double getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public double getWaterLevel() {
+        return waterLevel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
