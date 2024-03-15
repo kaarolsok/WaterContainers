@@ -10,10 +10,18 @@ public class WaterContainer implements Serializable {
     private double maxCapacity;
     private double waterLevel;
 
-    public WaterContainer(String name, double maxCapacity, double waterLevel) {
+    private WaterContainer(String name, double maxCapacity, double waterLevel) {
         this.name = name;
         this.maxCapacity = maxCapacity;
         this.waterLevel = waterLevel;
+    }
+
+    public WaterContainer create(String name, double maxCapacity, double waterLevel) {
+        if (maxCapacity <= 0)
+            throw new RuntimeException("Max capacity must be more than zero");
+        if (waterLevel < 0 || waterLevel > maxCapacity)
+            throw new RuntimeException("Invalid water level value");
+        return new WaterContainer(name, maxCapacity, waterLevel);
     }
 
     @Override
