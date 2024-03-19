@@ -16,12 +16,35 @@ public class WaterContainer implements Serializable {
         this.waterLevel = waterLevel;
     }
 
-    public WaterContainer create(String name, double maxCapacity, double waterLevel) {
+    public static WaterContainer create(String name, double maxCapacity, double waterLevel) {
         if (maxCapacity <= 0)
             throw new RuntimeException("Max capacity must be more than zero");
         if (waterLevel < 0 || waterLevel > maxCapacity)
             throw new RuntimeException("Invalid water level value");
         return new WaterContainer(name, maxCapacity, waterLevel);
+    }
+
+    public void addWater(double value) {
+        if (value <= 0)
+            throw new RuntimeException("Value should be more than zero");
+        if ((waterLevel + value) > maxCapacity)
+            throw new RuntimeException("Too much water to add");
+        else
+            waterLevel += value;
+    }
+
+    public void pourOutWater(double value) {
+        if (value <= 0)
+            throw new RuntimeException("Value should be more than zero");
+        else if (waterLevel - value < 0)
+            throw new RuntimeException("Too much water to add");
+        else
+            waterLevel -= value;
+    }
+
+    public void pourWater(WaterContainer destination, double value){
+        this.pourOutWater(value);
+        destination.addWater(value);
     }
 
     public String getName() {
